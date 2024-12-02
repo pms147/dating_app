@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <style>
+      /* Body styling */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* Container for the form */
+      .form-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      } /* Wrapper chứa nút Back và tiêu đề */
+      .header-container {
+        display: flex;
+        align-items: center; /* Căn giữa theo trục dọc */
+        gap: 10px; /* Khoảng cách giữa nút và tiêu đề */
+        margin-bottom: 20px; /* Khoảng cách dưới */
+      }
+
+      /* General input styling */
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      /* Focus state for inputs */
+      input:focus,
+      select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+
+      /* Labels */
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #333;
+      }
+
+      /* Button styling */
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      /* Header styling */
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-left: 48px;
+      }
+
+      /* Back button */
+      .back-button {
+        display: inline-block;
+        margin-bottom: 20px;
+        background-color: #ddd;
+        color: #333;
+        padding: 8px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+      }
+
+      .back-button:hover {
+        background-color: #bbb;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <div class="header-container">
+        <a href="{{ url_for('index') }}" class="back-button">Back</a>
+        <h1>Sign Up</h1>
+      </div>
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+          <label for="name">{{ form.name.label }}</label>
+          {{ form.name }}
+        </p>
+        <p>
+          <label for="email">{{ form.email.label }}</label>
+          {{ form.email }}
+        </p>
+        <p>
+          <label for="password">{{ form.password.label }}</label>
+          {{ form.password }}
+        </p>
+        <p>
+          <label for="gender">{{ form.gender.label }}</label>
+          {{ form.gender }}
+        </p>
+        <p>
+          <label for="preference">{{ form.preference.label }}</label>
+          {{ form.preference }}
+        </p>
+        <p>{{ form.submit }}</p>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+# Bỏ qua thư mục venv (thư mục chứa virtual environment)
+/venv/
+```

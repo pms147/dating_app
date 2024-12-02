@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matches</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f7f7f7;
+        margin: 0;
+      }
+
+      .content {
+        width: 50%;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        overflow: hidden;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .card {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .card img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .card h2 {
+        font-size: 24px;
+        margin: 10px 0;
+      }
+
+      .card p {
+        font-size: 16px;
+        color: #555;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-around;
+        padding: 15px;
+      }
+
+      button {
+        border: none;
+        background-color: white;
+        padding: 10px 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24px;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>Your Matches</h1>
+      <div id="user-container" class="card">
+        <img id="user-image" src="" alt="Profile Picture" />
+        <h2 id="user-name"></h2>
+        <p id="user-info"></p>
+      </div>
+      <div class="buttons">
+        <button class="dislike" onclick="showNextUser()">👎</button>
+        <button class="like" onclick="showNextUser()">❤️</button>
+      </div>
+    </div>
+
+    <script>
+      // Array of users
+      const users = [
+        {% for user in matches %}
+        {
+          name: "{{ user['name'] }}",
+          age: "{{ user['age'] }}",
+          image: "{{ url_for('static', filename='Image/' + user['image']) }}",
+          info: "{{ user['info'] }}",
+        },
+        {% endfor %}
+      ];
+
+      let currentIndex = 0; // Track the current user index
+
+      // Function to display a user
+      function displayUser(index) {
+        if (index < users.length) {
+          const user = users[index];
+          document.getElementById("user-image").src = user.image;
+          document.getElementById("user-name").innerText = `${user.name}, ${user.age}`;
+          document.getElementById("user-info").innerText = user.info;
+        } else {
+          document.getElementById("user-container").innerHTML =
+            "<h2>No more matches!</h2>";
+          document.querySelector(".buttons").style.display = "none";
+        }
+      }
+
+      // Function to show the next user
+      function showNextUser() {
+        currentIndex++;
+        if (currentIndex < users.length) {
+          displayUser(currentIndex);
+        } else {
+          displayUser(currentIndex); // Show "No more matches" if list is exhausted
+        }
+      }
+
+      // Display the first user initially
+      displayUser(currentIndex);
+    </script>
+  </body>
+</html>
